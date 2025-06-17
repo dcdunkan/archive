@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../../schemas/module.json
+
+number: 5
+name: Data link layer
+syllabus:
+    - "Services provided by DLL"
+    - "Error Detection and Correction Techniques"
+    - "Sliding window protocols"
+    - "High-Level Data Link Control (HDLC) protocol"
+    - "Medium Access Control (MAC) sublayer – Channel allocation problem, Multiple access protocols"
+    - "Ethernet"
+    - "Wireless LANs - 802.11, Repeaters, Hubs, Bridges, Switches, Routers and Gateways"

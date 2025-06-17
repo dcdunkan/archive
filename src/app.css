@@ -1,6 +1,8 @@
 @import "tailwindcss";
-
 @import "tw-animate-css";
+
+@import "../static/fonts/fonts.css";
+
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -117,43 +119,106 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground font-serif text-base;
 	}
-}
 
-@font-face {
-	font-family: "Geist";
-	src: url("/fonts/Geist[wght].woff2") format("woff2-variations");
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Geist";
-	src: url("/fonts/Geist-Italic[wght].woff2") format("woff2-variations");
-	font-weight: 100 900;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Geist Mono";
-	src: url("/fonts/GeistMono[wght].woff2") format("woff2-variations");
-	font-weight: 100 900;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Geist Mono";
-	src: url("/fonts/GeistMono-Italic[wght].woff2") format("woff2-variations");
-	font-weight: 100 900;
-	font-style: italic;
-	font-display: swap;
+	a {
+		@apply decoration-muted-foreground hover:decoration-accent-foreground underline
+			decoration-dashed underline-offset-4 transition-colors duration-150 ease-in;
+	}
 }
 
 @theme {
 	--font-sans: "Geist", sans-serif;
+	--font-serif: "Baskervville", serif;
 	--font-mono: "Geist Mono", monospace;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-size: 1.05rem;
+}
+
+#tap-markdown-preview {
+	@apply px-4 text-pretty **:snap-start **:scroll-mt-24 **:hyphens-auto;
+
+	h1 {
+		@apply mt-12 mb-4 text-4xl font-black;
+	}
+	h2 {
+		@apply mt-6 mb-4 text-3xl font-bold;
+	}
+	h3 {
+		@apply mt-4 mb-2 text-2xl font-semibold;
+	}
+	h4 {
+		@apply mt-4 mb-2 text-xl font-semibold;
+	}
+	h5 {
+		@apply mt-2 mb-2 text-lg font-semibold;
+	}
+	h6 {
+		@apply mt-2 mb-2 text-base font-semibold;
+	}
+
+	i {
+		@apply italic;
+	}
+
+	b {
+		@apply font-bold;
+	}
+
+	p,
+	li {
+		@apply my-2 leading-relaxed;
+	}
+
+	ol,
+	ul {
+		@apply list-outside pl-6;
+	}
+
+	ol {
+		@apply list-decimal;
+	}
+
+	ol[type="i" s] {
+		@apply list-[lower-roman];
+	}
+
+	ol[type="a" s] {
+		@apply list-[lower-alpha];
+	}
+
+	ol[type="I" s] {
+		@apply list-[upper-roman];
+	}
+
+	ol[type="A" s] {
+		@apply list-[upper-alpha];
+	}
+
+	ul {
+		@apply list-disc;
+	}
+
+	li {
+		@apply list-item;
+	}
+
+	table {
+		@apply w-full items-center justify-center self-center;
+	}
+
+	table,
+	tr,
+	th,
+	td {
+		@apply border-muted-foreground border-2 p-2;
+	}
+
+	.katex-block {
+		@apply flex flex-col items-center justify-center p-2;
+	}
 }

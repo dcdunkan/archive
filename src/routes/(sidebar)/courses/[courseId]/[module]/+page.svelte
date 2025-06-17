@@ -1,0 +1,67 @@
+<script lang="ts">
+	import FancyHeader from "$lib/components/fancy-header.svelte";
+	import { Button } from "$lib/components/ui/button";
+	import { roman } from "$lib/helpers";
+	import { BookOpenIcon } from "@lucide/svelte";
+	import { onMount } from "svelte";
+	import type { PageProps } from "./$types";
+	import TocTree from "./toc-tree.svelte";
+
+	let { data }: PageProps = $props();
+	let { course, module } = data;
+</script>
+
+<svelte:head>
+	<title>{module.name} | {course.name}</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" />
+</svelte:head>
+
+<div class="flex min-h-svh flex-col items-center justify-center space-y-8">
+	<div class="space-y-2 text-center">
+		<div class="font-serif text-xl">Module {roman(module.number)}</div>
+		<div class="px-6 font-serif text-4xl font-bold">{module.name}</div>
+		<!-- <div class="text-muted-foreground font-serif text-lg">{course.name}</div> -->
+	</div>
+
+	<div class="flex w-full justify-center">
+		<Button size="lg" href="#tap-markdown-preview"><BookOpenIcon /> Start Reading</Button>
+	</div>
+
+	<div class="flex w-full flex-col items-center justify-center gap-4 font-serif text-xl">
+		<a href="#tap-table-of-contents">Table of Contents</a>
+		<a href="#tap-documents">Documents</a>
+		<a href="#tap-videos">Videos & Playlists</a>
+		<a href="#tap-questions">Questions & Answers</a>
+	</div>
+</div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-table-of-contents">
+	<FancyHeader class="font-serif text-2xl">Table of Contents</FancyHeader>
+	<div class={"h-full overflow-hidden px-4 transition-[max-height] duration-500 ease-in-out will-change-[max-height]"}>
+		<TocTree entries={module.hierarchy} />
+	</div>
+</div>
+
+<div id="tap-markdown-preview" class="snap-y snap-start scroll-mt-24">
+	{#each module.hierarchy as part}
+		<div class="min-h-svh">
+			{@html part.content}
+		</div>
+	{/each}
+</div>
+
+<!-- <div class="min-h-[25svh] snap-start space-y-4" id="tap-module-start"></div> -->
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-documents">
+	<FancyHeader class="font-serif text-2xl">Documents</FancyHeader>
+</div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-videos">
+	<FancyHeader class="font-serif text-2xl">Videos & Playlists</FancyHeader>
+</div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-questions">
+	<FancyHeader class="font-serif text-2xl">Questions & Answers</FancyHeader>
+</div>
+
+<div class="min-h-[50svh]"></div>

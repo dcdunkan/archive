@@ -1,0 +1,72 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"code": {
+			"type": "string",
+			"minLength": 1
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1
+		},
+		"preamble": {
+			"type": "string"
+		},
+		"textbooks": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"referenceBooks": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"nptelCourse": {
+			"anyOf": [
+				{
+					"type": "object",
+					"properties": {
+						"title": {
+							"type": "string",
+							"minLength": 1
+						},
+						"url": {
+							"type": "string",
+							"format": "uri"
+						}
+					},
+					"required": ["title", "url"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"title": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["title"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"url": {
+							"type": "string",
+							"format": "uri"
+						}
+					},
+					"required": ["url"],
+					"additionalProperties": false
+				}
+			]
+		}
+	},
+	"required": ["code", "name", "preamble", "textbooks", "referenceBooks"],
+	"additionalProperties": false
+}
