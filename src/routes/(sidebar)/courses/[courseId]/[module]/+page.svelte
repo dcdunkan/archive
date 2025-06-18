@@ -9,6 +9,24 @@
 
 	let { data }: PageProps = $props();
 	let { course, module } = data;
+
+	import BiggerPicture from "bigger-picture";
+
+	onMount(() => {
+		let bp = BiggerPicture({
+			target: document.body,
+		});
+		let images = document.querySelectorAll("img");
+		for (const image of images) {
+			image.addEventListener("click", (e) => {
+				if (e.currentTarget == null) return;
+				bp.open({
+					items: images,
+					el: e.currentTarget,
+				});
+			});
+		}
+	});
 </script>
 
 <svelte:head>
@@ -32,6 +50,8 @@
 		<a href="#tap-documents">Documents</a>
 		<a href="#tap-videos">Videos & Playlists</a>
 		<a href="#tap-questions">Questions & Answers</a>
+		<a href="#tap-figures">Figures</a>
+		<a href="#tap-tables">Tables</a>
 	</div>
 </div>
 
@@ -62,6 +82,14 @@
 
 <div class="snap-start scroll-mt-24 space-y-4" id="tap-questions">
 	<FancyHeader class="font-serif text-2xl">Questions & Answers</FancyHeader>
+</div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-figures">
+	<FancyHeader class="font-serif text-2xl">Figures</FancyHeader>
+</div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-tables">
+	<FancyHeader class="font-serif text-2xl">Tables</FancyHeader>
 </div>
 
 <div class="min-h-[50svh]"></div>

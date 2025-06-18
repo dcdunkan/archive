@@ -7,13 +7,13 @@ import markdownItAnchorPlugin from "markdown-it-anchor";
 import { markdownItFancyListPlugin } from "markdown-it-fancy-lists";
 import type { Token } from "markdown-it/index.js";
 import fs from "node:fs";
-import { join, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve } from "node:path";
 import slugify from "slugify";
 import { z } from "zod/v4";
 
 const DATA_DIR = "./data";
 const MAX_TOC_DEPTH = 3;
-// todo: copy images
+const STATIC_DIR = "./static";
 
 export const COURSE_SCHEMA = z.object({
 	code: z.string().nonempty(),
@@ -53,44 +53,73 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 
 	const modules: Module[] = [];
 	const slugger = new GithubSlugger();
+	const mdit = new MarkdownIt({
+		html: true,
+		linkify: true,
+		typographer: true,
+	})
+		.use(markdownItAnchorPlugin, {
+			slugify: (str) => slugger.slug(str, false),
+			permalink: markdownItAnchorPlugin.permalink
+				.headerLink({ symbol: "#" }),
+		})
+		.use(markdownItKatexPlugin)
+		.use(markdownItFancyListPlugin, {});
+
+	const usedImages = new Set<string>();
 
 	for (const moduleDir of moduleDirs) {
 		const modulePath = join(coursePath, moduleDir);
+
+		mdit.renderer.rules.image = function(tokens, idx) {
+			const token = tokens[idx];
+			const src = moduleDir + "/" + token.attrGet("src");
+			const alt = token.content;
+			const title = token.attrGet("title");
+
+			// todo: make this shit better
+			return `<figure>
+			<img src="${src}" alt="${alt}" loading="lazy" decoding="async"${
+				title ? ` data-caption=${title}` : ""
+			}>${title ? `<figcaption>${title}</figcaption>` : ""}</figure>`;
+		};
 
 		const metadata = await fs.promises
 			.readFile(join(modulePath, "module.yaml"), "utf8")
 			.then((content) => z.parse(MODULE_SCHEMA, parseYaml(content)));
 
-		const mdit = new MarkdownIt({
-			html: true,
-			linkify: true,
-			typographer: true,
-		})
-			.use(markdownItAnchorPlugin, {
-				slugify: (str) => slugger.slug(str, false),
-				permalink: markdownItAnchorPlugin.permalink.headerLink({
-					symbol: "#",
-				}),
-			})
-			.use(markdownItKatexPlugin)
-			.use(markdownItFancyListPlugin, {});
-
 		const hierarchy: Hierarchy = [];
 
 		for (const filename of metadata.parts) {
+			slugger.reset(); // reset each time
+
 			const fileContent = await fs.promises
 				.readFile(join(modulePath, filename), "utf8");
+
 			const tokens = mdit.parse(fileContent.trim(), {});
 			const fileToc = getMarkdownToc(tokens);
 			if (fileToc.length !== 1 || fileToc[0].level !== 1) {
 				throw new Error("Module part should have the the part name as H1 and only one H1");
 			}
-			slugger.reset(); // reset each time
 
+			// manage content and toc
 			hierarchy.push({
 				...fileToc[0],
-				content: mdit.render(fileContent),
+				content: mdit.renderer.render(tokens, mdit.options, {}), // to prevent the slug re-occurrence
 			});
+
+			// manage images
+			const images = tokens.filter(token => token.type === "inline")
+				.flatMap(token => token.children || [])
+				.filter(child => child.type === "image")
+				.map((image) => image.attrGet("src"))
+				.filter((src) => src != null)
+				.filter((src) => src.length > 0 && !URL.canParse(src))
+				.map((src) => resolve(modulePath, src));
+
+			for (const image of images) {
+				usedImages.add(image);
+			}
 		}
 
 		modules.push({
@@ -107,8 +136,16 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 				strict: true,
 			}),
 		});
+	}
 
-		slugger.reset(); // reset each time
+	// copy source images to static directory
+	await fs.promises.rm(join(STATIC_DIR, "courses"), { recursive: true, force: true });
+	for (const filepath of usedImages) {
+		const relativePath = relative(resolve(DATA_DIR), filepath);
+		const sourceDir = dirname(relativePath);
+		const destinationDir = join(STATIC_DIR, sourceDir);
+		await fs.promises.mkdir(destinationDir, { recursive: true });
+		await fs.promises.copyFile(filepath, join(destinationDir, basename(relativePath)));
 	}
 
 	return {
@@ -120,7 +157,7 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 		nptelCourse: metadata.nptelCourse,
 
 		path: coursePath,
-		modules: await Promise.all(modules),
+		modules: modules,
 	};
 }
 

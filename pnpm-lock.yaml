@@ -11,6 +11,9 @@ importers:
       '@std/yaml':
         specifier: jsr:^1.0.8
         version: '@jsr/std__yaml@1.0.8'
+      bigger-picture:
+        specifier: ^1.1.19
+        version: 1.1.19
       fuzzysort:
         specifier: ^3.1.0
         version: 3.1.0
@@ -768,6 +771,9 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  bigger-picture@1.1.19:
+    resolution: {integrity: sha512-LhBPJ3z7YcNsK5lo/4i2KGbMqTMgpl7cI9If5F52VPKLcTUD5+dLr7m0G7np1yVuLlOWr28BK9yb/C8CBlKbOw==}
 
   bits-ui@2.6.0:
     resolution: {integrity: sha512-vb0J2C7Jfh/ePnoRwPTVcnMl2JJFFmv3zv4Ssv/DU18WkB5xgIU9jEmfd3IcR7mTjIpFZgYfil1j4w6Fa+OoVw==}
@@ -2241,6 +2247,8 @@ snapshots:
   axobject-query@4.1.0: {}
 
   balanced-match@1.0.2: {}
+
+  bigger-picture@1.1.19: {}
 
   bits-ui@2.6.0(@internationalized/date@3.8.2)(svelte@5.34.1):
     dependencies:

@@ -54,6 +54,7 @@
 	},
 	"dependencies": {
 		"@std/yaml": "jsr:^1.0.8",
+		"bigger-picture": "^1.1.19",
 		"fuzzysort": "^3.1.0",
 		"github-slugger": "^2.0.0",
 		"katex": "^0.16.22",
