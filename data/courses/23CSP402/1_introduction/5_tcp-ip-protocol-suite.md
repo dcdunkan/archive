@@ -4,12 +4,13 @@
 - The set of communication protocols used for the internet and other similar networks
 - Viewed as a set of layers
 - Each layer solves a set of problems involving the transmission of data and provides well defined services to the upper layers
-
 - Consists of 4 layers:
   1. Link layer
   2. Internet layer
   3. Transport layer
   4. Application layer
+
+![OSI vs TCP/IP](images/7d6ca633e7a59384cbcc1bb360258fa0dbcac0fa5abb7bd993ab099a86c6dd75.jpg "OSI vs TCP/IP")
 
 ## Application layer
 
@@ -45,3 +46,5 @@ This is the place where high level protocols reside and those protocols include 
 - Routing and synchronizing data over a network, checking data formats, converting signals and error detection in the transmitted data
 - Signaling and network medium standards such as Ethernet, Token ring, FDDI, X.25,Frame Relay, Point-to-Point Protocol(PPP), RS 232 etc. are defined in this layer
 - Network Interface Cards, hubs, repeaters, switches etc. operate at this layer
+
+![Protocols in each layers](images/276f1414066a7b5210f78e6cb2880a2405d512396dcf5d6d2bc6b575f4419f48.jpg "Protocols in each layers")

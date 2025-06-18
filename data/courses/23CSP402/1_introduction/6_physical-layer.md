@@ -18,6 +18,10 @@ One major task of Physical Layer is to provide services for the data link layer.
 - For example, data are stored in computer memory in the form of Os and 1s. They can be converted to a digital signal or modulated into an analog signal for transmission across a medium.
 - Signals can be analog or digital. Analog signals can have an infinite number of values in a range; digital signals can have only a limited number of values.
 
+![Analog signal](images/9e3d0640cca8dd9f040be66faa95c7daf03b7a76a0ba83fbd9f8fcdab793bff8.jpg "Analog signal")
+
+![Digital signal](images/9e3d0640cca8dd9f040be66faa95c7daf03b7a76a0ba83fbd9f8fcdab793bff9.jpg "Digital signal")
+
 ## Periodic and Non-periodic Signals
 
 - Both analog and digital signals can take one of two forms: periodic or non-periodic.
@@ -31,6 +35,10 @@ One major task of Physical Layer is to provide services for the data link layer.
 - A digital signal can have more than two levels. In this case, we can send more than 1 bit for each level.
 - We send 1 bit per level in part a of the figure and 2 bits per level in part b of the figure.
 - In general, if a signal has L levels, each level needs $\log_2 L$ bits
+
+![A digital signal with two levels](images/9fdf3cf6d4e31b6d5437439ba2126ab7cae3fe5034e973371195f3c61033f74c.jpg "A digital signal with two levels")
+
+![A digital signal with four levels](images/9fdf3cf6d4e31b6d5437439ba2126ab7cae3fe5034e973371195f3c61033f74d.jpg "A digital signal with four levels")
 
 - Bit Rate - The bit rate is the number of bits sent in 1second, expressed in bits per second (bps).
 - Bit Length - The bit length is the distance one bit occupies on the transmission medium.

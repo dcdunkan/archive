@@ -5,6 +5,8 @@
 - The OSI model is a layered framework for the design of network systems that allows communication between all types of computer systems
 - It consists of seven separate but related layers
 
+![OSI reference model](images/3221da62d70e6d0fcd9e51aebdb161161bb3aab2456c38f00268bd599ce9d5fc.jpg "OSI reference model")
+
 ## Physical Layer
 
 - The physical layer is concerned with transmitting raw bits over a communication channel
@@ -45,6 +47,8 @@ Other responsibilities:
 
 1. Logical addressing - The physical addressing implemented by the data link layer handles the addressing problem locally. If a packet passes the network boundary, we need another addressing system to help distinguish the source and destination systems. The network layer adds a header to the packet coming from the upper layer that, among other things, includes the logical addresses of the sender and receiver
 2. Routing - When independent networks or links are connected to create internetworks (network of networks) or a large network, the connecting devices (called routers or switches) route or switch the packets to their final destination
+
+![Source-to-destination delivery](images/792450dc701f33c920616a5805802d83bd8505945c5121650f2fc030ed4a1705.jpg "Source-to-destination delivery")
 
 ## Transport Layer
 

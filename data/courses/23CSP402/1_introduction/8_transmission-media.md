@@ -2,6 +2,8 @@
 
 A transmission medium can be broadly defined as anything that can carry information from a source to a destination
 
+![Classification of Transmission Media](images/3ffbf06ccdbf23cd98bb6e1cec828b90f2344a78a149b8bffdefe58e702f9c4b.jpg "Classification of Transmission Media")
+
 ## Twisted-Pair Cable
 
 - A twisted pair consists of two conductors (normally copper), each with its own plastic insulation, twisted together.
@@ -12,9 +14,13 @@ A transmission medium can be broadly defined as anything that can carry informat
 - This means that the receiver, which calculates the difference between the two, receives no unwanted signals. The unwanted signals are mostly canceled out.
 - The number of twists per unit of length (e.g., inch) has some effect on the quality of the cable.
 
+![Twisted-pair cable](images/1c52969009ef937dd5807b2a0f97d7cafbdd3bd76bd46b26043699e577f3ea6d.jpg "Twisted-pair cable")
+
 - The most common twisted-pair cable used in communications is referred to as unshielded twisted-pair (utp). IBM has also produced a version of twisted-pair cable for its use called shielded twisted-pair (STP).
 - The most common UTP connector is RJ45 (RJ stands for registered jack)
 - Twisted-pair cables are used in telephone lines to provide voice and data channels. Local-area networks also use twisted-pair cables.
+
+![RJ45 Connector & UTP and STP](images/e08a4efe3828678b46c028e4105cc09989f46487aeae6bec7249f8c994a60afe.jpg "RJ45 Connector & UTP and STP")
 
 ## Coaxial Cable
 
@@ -28,6 +34,10 @@ A transmission medium can be broadly defined as anything that can carry informat
 - Cable TV networks also use coaxial cables.
 - Another common application of coaxial cable is in traditional Ethernet LANs
 
+![](images/deb2325cc7019c27a418da43344796ab7fdbee5cc8ffc876c93af9d1e9982747.jpg)
+
+![Coaxial cable](images/abf046379c11d591432fff2b02115497e1e028396949ca3e6704a5643c205d26.jpg "Coaxial cable")
+
 | Category | Impedance | Use            |
 | -------- | --------- | -------------- |
 | RG-59    | 75 &ohm;  | Cable TV       |
@@ -35,6 +45,8 @@ A transmission medium can be broadly defined as anything that can carry informat
 | RG-11    | 50 &ohm;  | Thick Ethernet |
 
 ## Fiber-Optic Cable
+
+![Fiber-Optic Cable](images/77a8bb185ac43387fca988c72ddf88e931365496d24ac9d7c55f5c1ca428e1e3.jpg "Fiber-Optic Cable")
 
 - A fiber-optic cable is made of glass or plastic and transmits signals in the form of light.
 - Optical fibers use reflection to guide light through a channel. A glass or plastic core is surrounded by a cladding of less dense glass or plastic

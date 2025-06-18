@@ -44,6 +44,8 @@ The time needed for each intermediate or end device to hold the message before i
 
 The bandwidth-delay product defines the number of bits that can fill the link.
 
+![Cases of bandwidth-delay product](images/bd2eb76c3c491fe52cfc7272c47a0411d2734a0309f34d296aa1e8a11d6f9f3b.jpg "Cases of bandwidth-delay product")
+
 Case 1: Assume a link is of bandwidth 1bps and the delay of the link is 5s. Let us find the bandwidth-delay product in this case. From the image, we can say that this product ${ 1 \times 5 }$ is the maximum number of bits that can fill the link. There can be close to 5 bits at any time on the link.
 
 Case 2: Assume a link is of bandwidth 3bps. From the image, we can say that there can be a maximum of $3 \times 5 = 1 5$ bits on the line. The reason is that, at each second, there are 3 bits on the line and the duration of each bit is 0.33s.

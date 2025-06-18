@@ -91,7 +91,7 @@ There are two types of transmission technology
 
 #### Topologies
 
-![](images/0f4d8a0ad09d32c36b6a8f5154f530c05ad1c3d7bbc6ee3c90895a45d411594b.jpg)
+![Topologies classified](images/0f4d8a0ad09d32c36b6a8f5154f530c05ad1c3d7bbc6ee3c90895a45d411594b.jpg "Topologies")
 
 ##### Mesh Topology
 
@@ -104,6 +104,8 @@ To find the number of physical links in a fully connected mesh network with n no
 $$
 n(n-1)/2
 $$
+
+![Mesh Topology](images/38cbbbbfa9b6ee97e8716dbcbaa15a358a5d25fbbf095238ff7ef6936bcd5bde.jpg "Mesh Topology")
 
 Advantages:
 
@@ -121,10 +123,12 @@ connection of telephone regional offices
 
 ##### Star Topology
 
-each device has a dedicated point-to-point link only to a central controller, usually called a hub.
+Each device has a dedicated point-to-point link only to a central controller, usually called a hub.
 
 - The devices are not directly linked to one another
 - The controller (hub) acts as an exchange: If one device wants to send data to another, it sends the data to the controller, which then relays the data to the other connected device
+
+![Star Topology](images/ecc10bf9ed20bf02aac6aad9df65caf77729cbbfdce1ee3c22b83a96a7a32243.jpg "Star Topology")
 
 Advantages:
 
@@ -148,6 +152,8 @@ A bus topology is multipoint. One long cable acts as a backbone to link all the 
 
 Nodes are connected to the bus cable by drop lines and taps.
 
+![Bus Topology](images/fcda0ea149cb7538c63f05fa15003e08fe27359bf4e42100117b90214c9b3d6c.jpg "Bus Topology")
+
 Advantages:
 
 - Ease of installation
@@ -165,9 +171,11 @@ Ethernet LANs can use a bus topology
 
 ##### Ring Topology
 
-each device has a dedicated point-to-point connection with only the two devices on either side of it.
+Each device has a dedicated point-to-point connection with only the two devices on either side of it.
 
 A signal is passed along the ring in one direction, from device to device, until it reaches its destination. Each device in the ring incorporates a repeater. Repeater regenerates the bits and passes them.
+
+![Ring Topology](images/4ab8e353f05f6e682a07ca674ae2fe1a0f89f562b5a9df24c8b67db57ac425f8.jpg "Ring Topology")
 
 Advantages:
 
@@ -181,7 +189,9 @@ Disadvantages:
 
 ##### Hybrid Topology
 
-we can have a main star topology with each branch connecting several stations in a bus topology
+We can have a main star topology with each branch connecting several stations in a bus topology
+
+![Example of Hybrid Topology](images/ea26f49b5be7fbd277c41d5e77c659b5da55c34dc0e2dd13c5b09806e2b86324.jpg "Example of Hybrid Topology")
 
 ### Metropolitan Area Networks (MAN)
 
@@ -189,9 +199,13 @@ we can have a main star topology with each branch connecting several stations in
 - Example of a MAN is the cable television network available in many cities
 - Another example of a MAN is the part of the telephone company network that can provide a high-speed DSL line to the customer
 
-### Wide Area Network (wAN)
+### Wide Area Network (WAN)
 
 - A wide area network, or wAn, spans a large geographical area, often a country or continent
 - The switched wAN connects the end systems, which usually comprise a router that connects to another LAN or WAN
 - The point-to-point WAN is normally a line leased from a telephone or cable TV provider that connects a home computer or a small LAN to an Internet service provider (IsP).
 - This type of wAN is often used to provide Internet access.
+
+![Switched WAN](images/e6e695277899d1a3a0c9ff49d51f05e6b73a222d2937d301ac96c9f3eb15f158.jpg "Switched WAN")
+
+![Point-to-point WAN](images/e6e695277899d1a3a0c9ff49d51f05e6b73a222d2937d301ac96c9f3eb15f159.jpg "Point-to-point WAN")

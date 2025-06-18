@@ -13,6 +13,8 @@
 - Resource sharing - a group of office workers share a common printer
 - Client-server model - two processes are involved, one on the client machine and one on the server machine. Communication takes the form of the client process sending a message over the network to the server process. The client process then waits for a reply message. When the server process gets the request, it performs the requested work or looks up the requested data and sends back a reply.
 
+![Client-server model](images/db14a2c9a1b725368d2049b31d95b5753e1bb46472e5d5652ed3986e2519c51e.jpg "Client-server model")
+
 - e-mail
 - Videoconferencing
 - e-commerce (electronic commerce)
@@ -62,3 +64,9 @@ Communication between two devices can be simplex, half-duplex, or full-duplex
 - Eg: telephone network.
 - The full-duplex mode is used when communication in both directions is required all the time
 - The capacity of the channel, however, must be divided between the two directions.
+
+![Simplex](images/1dd0b347bd4fc06d303ec72d8e67a3640af9cc968b759357c809d8fcf6b1e13e.jpg "Simplex")
+
+![Half-duplex](images/1dd0b347bd4fc06d303ec72d8e67a3640af9cc968b759357c809d8fcf6b1e13f.jpg "Half-duplex")
+
+![Full-duplex](images/1dd0b347bd4fc06d303ec72d8e67a3640af9cc968b759357c809d8fcf6b1e13g.jpg "Full-duplex")

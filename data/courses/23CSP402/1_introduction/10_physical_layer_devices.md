@@ -35,3 +35,5 @@ Can't be used to extend the distance between nodes.
 - It works like active hubs and includes remote management capabilities.
 - They also provide flexible data rates to network devices.
 - It also enables an administrator to monitor the traffic passing through the hub and to configure each port in the hub.
+
+![Repeater and Hub](images/93b726988db777318b130bd59cc8e7156f4ccbb03d406c4e35a1113805905739.jpg "Repeater and Hub")

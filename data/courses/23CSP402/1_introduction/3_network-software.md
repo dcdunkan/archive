@@ -12,9 +12,9 @@
 - Instead, each layer passes data and control information to the layer immediately below it, until the lowest layer is reached.
 - Below layer 1 is the physical medium through which actual communication occurs.
 
-Layers, protocols, and interfaces
+![Layers, protocols, and interfaces](images/3213204835733a1a8f96b82ced34ce583d37c5afbd63a2422d8d85192788e486.jpg "Layers, protocols, and interfaces")
 
-Example information flow supporting virtual communication in layer 5
+![Example information flow supporting virtual communication in layer 5](images/98ad2b730129830581cc07bca48026dce491b91867a40134413754ca8ac29b81.jpg "Example information flow supporting virtual communication in layer 5")
 
 - A message, M, is produced by an application process running in layer 5 and given to layer 4 for transmission.
 - Layer 4 puts a header in front of the message to identify the message and passes the result to layer 3. The header includes control information(sequence numbers) to allow layer 4 on the destination machine to deliver messages in the right order if the Iower layers do not maintain sequence.

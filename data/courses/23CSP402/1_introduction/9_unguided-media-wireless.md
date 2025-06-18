@@ -21,9 +21,11 @@
 - Antennas must be directional, facing each other and either tall enough or close enough together not to be affected by the curvature of the earth.
 - Line-of-sight propagation is tricky because radio transmissions cannot be completely focused.
 
-<!-- todo fix this -->
+![Different kinds of unguided propogation](images/4fefa18587344da7a326541120c2f6995faca3b3e1131c82ca55d6d94e0c63bc.jpg "Different kinds of unguided propogation")
 
 ## Wireless Transmission Waves
+
+![Different types of wireless transmission waves](images/4fefa18587344da7a326541120c2f6995faca3b3e1131c82ca55d6d94e0c63bb.jpg "Different types of wireless transmission waves")
 
 ### Radio Waves
 
@@ -35,7 +37,7 @@
 - Radio waves, particularly those of low and medium frequencies, can penetrate walls
 - Radio waves are used for multicast communications, such as radio and television, and paging systems.
 
-Omnidirectional antenna
+![Omnidirectional antenna](images/1f92991c4d5bf61f7494dd37b106ca87ae94ffe239cadc5360e7a6edde3be074.jpg "Omnidirectional antenna")
 
 ### Microwaves
 
@@ -51,6 +53,8 @@ Characteristics of microwave propagation:
 - Use of certain portions of the band requires permission from authorities
 - Microwaves need unidirectional antennas that send out signals in one direction.
 
+![Images of antennas](images/aba75085e870b196cf0a37b2c1493ce99230afe4c26aba0bae27041e4056df30.jpg "Dish antenna and Horn antenna")
+
 - Microwaves are very useful when unicast (one-to-one) communication is needed between the sender and the receiver.
 - They are used in cellular phones, satellite networks and wireless LANs.
 
@@ -62,8 +66,8 @@ Characteristics of microwave propagation:
 - We cannot use infrared waves outside a building because the sun's rays contain infrared waves that can interfere with the communication
 - The Infrared Data Association (IrDA)has established standards for using these signals for communication between devices such as keyboards, mice, PCs, and printers.
 
-RJ 45 Connector
+![RJ 45 Connector](images/a36564b7e74bfcc7ebfcc0e127714ae7a1cb98af95e34acda821478d66cfe7a0.jpg "RJ 45 Connector")
 
-network interface card (Nic)
+![Network Interface Card (NIC)](images/2622737a050d252ba11311db2bd9ccfe924206e0913e824db2a5005096ea191f.jpg "Network Interface Card (NIC)")
 
-Router
+![Router](images/bac662bddc75a1e72f4d38e44c4d73357f175a985ef8bcfbefa43e2b7e9c6642.jpg "Router")
