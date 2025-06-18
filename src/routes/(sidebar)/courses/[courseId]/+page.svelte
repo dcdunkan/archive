@@ -10,6 +10,10 @@
 	let { course } = data;
 </script>
 
+<svelte:head>
+	<title>{course.name}</title>
+</svelte:head>
+
 <div class="text-center">
 	<h1 class="font-serif text-xl">{course.code}</h1>
 	<h1 class="font-serif text-4xl font-bold">{course.name}</h1>
@@ -23,11 +27,7 @@
 {/if}
 
 <div class="space-y-4">
-	<span class="flex items-center">
-		<span class="h-px flex-1 bg-gray-300"></span>
-		<span class="shrink-0 px-4 font-serif text-2xl">Modules</span>
-		<span class="h-px flex-1 bg-gray-300"></span>
-	</span>
+	<FancyHeader class="font-serif text-2xl">Modules</FancyHeader>
 
 	<div class="flex flex-col space-y-4">
 		{#each course.modules as module, i}
@@ -48,47 +48,12 @@
 			</div>
 		{/each}
 	</div>
-
-	<!-- <div class="flex flex-col space-y-4">
-		{#each course.modules as module, i}
-			<div
-				tabindex="0"
-				role="button"
-				onclick={(e) => {
-					const el = e.currentTarget.children.item(1) as HTMLDivElement;
-					console.log(Number(el.style.maxHeight.replace(/[^0-9]+/g, "")));
-					if (Number(el.style.maxHeight.replace(/[^0-9]+/g, "")) === 0) {
-						el.style.maxHeight = el.scrollHeight + "px";
-					} else {
-						el.style.maxHeight = "0";
-					}
-				}}
-				onkeydown={() => {}}
-				class="hover:bg-accent/20 rounded-lg border p-4 text-center transition-all duration-200"
-			>
-				<div>
-					<div class="font-serif text-2xl">{ROMAN[i]}</div>
-					<div class="font-serif text-xl">{module.name}</div>
-				</div>
-				<div class="max-h-0 overflow-hidden text-left transition-all duration-300">
-					<ul class="ml-4 list-outside list-disc p-4">
-						{#each module.syllabus as s}
-							<li class="list-item">{s}</li>
-						{/each}
-					</ul>
-				</div>
-			</div>
-		{/each}
-	</div> -->
 </div>
 
 {#if course.textbooks.length}
 	<div class="space-y-4">
-		<span class="flex items-center">
-			<span class="h-px flex-1 bg-gray-300"></span>
-			<span class="shrink-0 px-4 font-serif text-2xl">Text Books</span>
-			<span class="h-px flex-1 bg-gray-300"></span>
-		</span>
+		<FancyHeader class="font-serif text-2xl">Text Books</FancyHeader>
+
 		<ol class="ml-6 list-outside list-decimal space-y-2">
 			{#each course.textbooks as textbook}
 				<li class="list-item">{textbook}</li>
@@ -99,11 +64,8 @@
 
 {#if course.referenceBooks.length}
 	<div class="space-y-4">
-		<span class="flex items-center">
-			<span class="h-px flex-1 bg-gray-300"></span>
-			<span class="shrink-0 px-4 font-serif text-2xl">Reference Books</span>
-			<span class="h-px flex-1 bg-gray-300"></span>
-		</span>
+		<FancyHeader class="font-serif text-2xl">Reference Books</FancyHeader>
+
 		<ol class="ml-6 list-outside list-decimal space-y-2">
 			{#each course.referenceBooks as reference}
 				<li class="list-item">{reference}</li>

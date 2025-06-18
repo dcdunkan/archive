@@ -143,19 +143,19 @@ html {
 	@apply px-4 text-pretty **:snap-start **:scroll-mt-24 **:hyphens-auto;
 
 	h1 {
-		@apply mt-12 mb-4 text-4xl font-black;
+		@apply mt-16 mb-6 text-4xl font-black;
 	}
 	h2 {
-		@apply mt-6 mb-4 text-3xl font-bold;
+		@apply mt-8 mb-4 text-3xl font-black;
 	}
 	h3 {
-		@apply mt-4 mb-2 text-2xl font-semibold;
+		@apply mt-6 mb-2 text-2xl font-semibold;
 	}
 	h4 {
-		@apply mt-4 mb-2 text-xl font-semibold;
+		@apply mt-6 mb-2 text-xl font-bold;
 	}
 	h5 {
-		@apply mt-2 mb-2 text-lg font-semibold;
+		@apply mt-4 mb-2 text-lg font-medium;
 	}
 	h6 {
 		@apply mt-2 mb-2 text-base font-semibold;
@@ -209,6 +209,10 @@ html {
 
 	table {
 		@apply w-full items-center justify-center self-center;
+	}
+
+	th {
+		@apply font-bold text-balance;
 	}
 
 	table,

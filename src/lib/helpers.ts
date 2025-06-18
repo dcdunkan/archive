@@ -11,7 +11,14 @@ const ROMAN_NUMERALS: Record<number, string> = {
 	9: "IX",
 	10: "X",
 };
-
 export function roman(num: number) {
 	return ROMAN_NUMERALS[num] ?? num;
+}
+
+// only cares about english
+export function pluralize(count: number, singular: string): string;
+export function pluralize(count: number, singular: string, plural: string): string;
+export function pluralize(count: number, singular: string, plural?: string): string {
+	if (plural == null) plural = singular + "s";
+	return count === 1 ? singular : plural;
 }

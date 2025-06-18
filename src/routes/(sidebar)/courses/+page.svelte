@@ -4,6 +4,7 @@
 	import { ArrowRightIcon } from "@lucide/svelte";
 	import fuzzysort from "fuzzysort";
 	import type { PageProps } from "./$types";
+  import { pluralize } from "$lib/helpers";
 
 	let { data }: PageProps = $props();
 
@@ -20,7 +21,7 @@
 <div class="bg-background sticky top-[5em] z-10">
 	<SearchInput
 		bind:value={searchString}
-		placeholder="Search among {data.courses.length} courses"
+		placeholder="Search among {data.courses.length} {pluralize(data.courses.length, "course")}"
 	/>
 </div>
 

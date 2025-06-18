@@ -22,7 +22,7 @@ It is the speed of bit transmission in a channel or link.
 
 The latency or delay defines how long it takes for an entire message to completely arrive at the destination from the time the first bit is sent out from the source.
 
-Latency $=$ propagation time $^ +$ transmission time $^ +$ queuing time + processing delay
+Latency $=$ propagation time $+$ transmission time $+$ queuing time $+$ processing delay
 
 ### Propagation Time
 

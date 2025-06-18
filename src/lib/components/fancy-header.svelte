@@ -2,6 +2,7 @@
 	import { cn } from "$lib/shadcn-utils";
 	import type { Snippet } from "svelte";
 
+	// todo: clean up this shit
 	let {
 		children,
 		class: className,

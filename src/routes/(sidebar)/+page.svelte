@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { pluralize } from "$lib/helpers";
 	import { PackageIcon } from "@lucide/svelte";
+	import type { PageProps } from "./$types";
+
+	let { data }: PageProps = $props();
 </script>
 
 <div class="space-y-4">
@@ -17,12 +21,13 @@
 <div class="space-y-4">
 	<div class="mb-6 grid grid-cols-2 gap-2 divide-x-2">
 		<div class="text-center">
-			<div class="text-6xl font-black">22</div>
-			<div>Courses</div>
+			<div class="text-6xl font-black font-sans">{data.courseCount}</div>
+			<div>{pluralize(data.courseCount, "Course")}</div>
 		</div>
+
 		<div class="text-center">
-			<div class="text-6xl font-black">451</div>
-			<div>Documents</div>
+			<div class="text-6xl font-black font-sans">{data.moduleCount}</div>
+			<div>{pluralize(data.moduleCount, "Module")}</div>
 		</div>
 	</div>
 </div>

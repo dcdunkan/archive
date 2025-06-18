@@ -33,9 +33,9 @@ There are two types of transmission technology
 
 <table>
     <tr>
-        <td>Interprocessor distance</td>
-        <td>Processors located in same</td>
-        <td>Example</td>
+        <th>Interprocessor distance</th>
+        <th>Processors located in same</th>
+        <th>Example</th>
     </tr>
     <tr>
         <td>1m</td>
