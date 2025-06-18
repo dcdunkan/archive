@@ -91,7 +91,11 @@ There are two types of transmission technology
 
 #### Topologies
 
-![Topologies classified](images/0f4d8a0ad09d32c36b6a8f5154f530c05ad1c3d7bbc6ee3c90895a45d411594b.jpg "Topologies")
+```mermaid
+%% Topologies
+flowchart TD
+    Topology --- Mesh & Star & Bus & Ring
+```
 
 ##### Mesh Topology
 

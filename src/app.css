@@ -223,7 +223,7 @@ html {
 	}
 
 	figure {
-		@apply my-6 text-center;
+		@apply my-6 text-center flex flex-col justify-center items-center;
 	}
 
 	figcaption {
@@ -233,6 +233,18 @@ html {
 	img {
 		@apply mx-auto max-w-full h-auto rounded-sm shadow-md;
 	}
+
+	/* svg {
+		@apply w-full;
+
+		*[stroke] {
+			@apply stroke-foreground;
+		}
+
+		*[fill]:not([fill="none"]) {
+			@apply fill-foreground;
+		}
+	} */
 }
 
 /** 

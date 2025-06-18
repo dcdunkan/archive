@@ -68,6 +68,6 @@ Characteristics of microwave propagation:
 
 ![RJ 45 Connector](images/a36564b7e74bfcc7ebfcc0e127714ae7a1cb98af95e34acda821478d66cfe7a0.jpg "RJ 45 Connector")
 
-![Network Interface Card (NIC)](images/2622737a050d252ba11311db2bd9ccfe924206e0913e824db2a5005096ea191f.jpg "Network Interface Card (NIC)")
+![Network Interface Card (NIC)](images/2622737a050d252ba11311db2bd9ccfe924206e0913e824db2a5005096ea191f.jpg "Network Interface Card &lpar;NIC&rpar;")
 
 ![Router](images/bac662bddc75a1e72f4d38e44c4d73357f175a985ef8bcfbefa43e2b7e9c6642.jpg "Router")

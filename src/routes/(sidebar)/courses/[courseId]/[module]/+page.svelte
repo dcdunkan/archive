@@ -11,12 +11,22 @@
 	let { course, module } = data;
 
 	import BiggerPicture from "bigger-picture";
+	import mermaid from "mermaid";
 
-	onMount(() => {
-		let bp = BiggerPicture({
+	mermaid.initialize({
+		startOnLoad: true,
+		fontFamily: "Baskervville",
+		theme: "neutral",
+		flowchart: {
+			curve: "linear",
+		},
+	});
+
+	onMount(async () => {
+		const bp = BiggerPicture({
 			target: document.body,
 		});
-		let images = document.querySelectorAll("img");
+		const images = document.querySelectorAll("img");
 		for (const image of images) {
 			image.addEventListener("click", (e) => {
 				if (e.currentTarget == null) return;
@@ -25,6 +35,31 @@
 					el: e.currentTarget,
 				});
 			});
+		}
+
+		const mermaidFences = document.querySelectorAll("code.language-mermaid");
+		for (const [index, fence] of mermaidFences.entries()) {
+			if (fence.parentElement?.tagName !== "PRE") continue;
+			const content = fence.parentElement.innerText;
+			const { svg, bindFunctions } = await mermaid.render(
+				"mermaid-" + index,
+				content,
+			);
+
+			const figure = document.createElement("figure");
+			figure.insertAdjacentHTML("afterbegin", svg);
+
+			const firstLine = content?.split("\n")?.[0];
+			if (firstLine && firstLine.startsWith("%% ")) {
+				const title = firstLine.slice(3);
+				const figcaption = document.createElement("figcaption");
+				figcaption.append(title);
+				figure.append(figcaption);
+			}
+
+			bindFunctions?.(figure);
+
+			fence.parentElement.replaceWith(figure);
 		}
 	});
 </script>

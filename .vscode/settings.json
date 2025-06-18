@@ -13,5 +13,8 @@
 	},
 	"[svelte]": {
 		"editor.defaultFormatter": "dprint.dprint"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "dprint.dprint"
 	}
 }

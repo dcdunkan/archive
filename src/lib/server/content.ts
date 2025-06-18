@@ -5,7 +5,7 @@ import GithubSlugger from "github-slugger";
 import MarkdownIt from "markdown-it";
 import markdownItAnchorPlugin from "markdown-it-anchor";
 import { markdownItFancyListPlugin } from "markdown-it-fancy-lists";
-import type { Token } from "markdown-it/index.js";
+import { default as Token } from "markdown-it/lib/token.mjs";
 import fs from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import slugify from "slugify";
@@ -80,7 +80,7 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 			// todo: make this shit better
 			return `<figure>
 			<img src="${src}" alt="${alt}" loading="lazy" decoding="async"${
-				title ? ` data-caption=${title}` : ""
+				title ? ` data-caption="${mdit.utils.escapeHtml(title)}"` : ""
 			}>${title ? `<figcaption>${title}</figcaption>` : ""}</figure>`;
 		};
 
