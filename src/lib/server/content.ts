@@ -17,9 +17,7 @@ const STATIC_DIR = "./static";
 
 export const COURSE_SCHEMA = z.object({
 	code: z.string().nonempty(),
-	name: z
-		.string()
-		.nonempty()
+	name: z.string().nonempty()
 		.refine((arg) => isNaN(Number(arg))),
 	preamble: z.string(),
 	textbooks: z.array(z.string()),
@@ -67,6 +65,7 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 		.use(markdownItFancyListPlugin, {});
 
 	const usedImages = new Set<string>();
+	const allImages = new Set<string>();
 
 	for (const moduleDir of moduleDirs) {
 		const modulePath = join(coursePath, moduleDir);
@@ -78,10 +77,20 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 			const title = token.attrGet("title");
 
 			// todo: make this shit better
-			return `<figure>
-			<img src="${src}" alt="${alt}" loading="lazy" decoding="async"${
-				title ? ` data-caption="${mdit.utils.escapeHtml(title)}"` : ""
-			}>${title ? `<figcaption>${title}</figcaption>` : ""}</figure>`;
+			return [
+				`<figure>`,
+				[
+					`<img`,
+					`src="${src}"`,
+					`alt="${alt}"`,
+					`loading="lazy"`,
+					`decoding="async"`,
+					title ? `data-caption="${mdit.utils.escapeHtml(title)}"` : "",
+					`/>`,
+				].join(" "),
+				...(title ? [`<figcaption>${title}</figcaption>`] : []),
+				`</figure>`,
+			].join("");
 		};
 
 		const metadata = await fs.promises
@@ -122,6 +131,24 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 			}
 		}
 
+		try {
+			// add all images to find unused images later
+			const moduleImagesDir = await fs.promises
+				.readdir(join(modulePath, "images"), { withFileTypes: true });
+			for (const image of moduleImagesDir) {
+				allImages.add(join(image.parentPath, image.name));
+			}
+		} catch (error) {
+			if (
+				error instanceof Error && "code" in error
+				&& (error as NodeJS.ErrnoException).code === "ENOENT"
+			) {
+				// ignore missing images folder
+			} else {
+				throw error;
+			}
+		}
+
 		modules.push({
 			number: metadata.number,
 			name: metadata.name,
@@ -146,6 +173,13 @@ async function resolveCourseDirectory(entry: fs.Dirent<string>): Promise<Course>
 		const destinationDir = join(STATIC_DIR, sourceDir);
 		await fs.promises.mkdir(destinationDir, { recursive: true });
 		await fs.promises.copyFile(filepath, join(destinationDir, basename(relativePath)));
+	}
+
+	// list unused images
+	const unusedImages = allImages.difference(usedImages);
+	if (unusedImages.size > 0) {
+		console.log(unusedImages.size, "unused images found:");
+		console.log("\t" + Array.from(unusedImages).join("\n\t"));
 	}
 
 	return {

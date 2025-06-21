@@ -28,7 +28,7 @@ Enhancements:
 ### Module View
 
 - [ ] Figure section which lists all the figures
-  - [ ] Numbering the figures
+  - [x] Numbering the figures
 - [ ] Table section
 - [ ] Bottom bar
   - [ ] Go to top
@@ -41,5 +41,5 @@ Enhancements:
 
 ### Tools
 
-- [ ] Utility for finding unused image sources
+- [x] Utility for finding unused image sources
 - [ ] Better image alts with VLMs

@@ -58,8 +58,38 @@
 			}
 
 			bindFunctions?.(figure);
-
 			fence.parentElement.replaceWith(figure);
+		}
+
+		/**
+		 * NOTE: Figures are made from many sources.
+		 *
+		 * - Mermaid diagrams are manually set to figures.
+		 * - Images from markdown are manually generated to figures.
+		 *
+		 * So, the figure numbers are generated after everything is loaded.
+		 */
+		const sections = document.querySelectorAll("#tap-markdown-preview div");
+		for (const [sectionIndex, section] of sections.entries()) {
+			for (
+				const [figureIndex, figure] of section
+					.querySelectorAll("figure").entries()
+			) {
+				let figcaption = figure.querySelector("figcaption");
+				if (figcaption == null) {
+					figcaption = document.createElement("figcaption");
+					figure.append(figcaption);
+				}
+				const figureNumber = [
+					module.number,
+					sectionIndex + 1,
+					figureIndex + 1,
+				].join(".");
+				const figureNumberElement = document.createElement("div");
+				figureNumberElement.classList.add("md-figure-number");
+				figureNumberElement.innerText = `Fig ${figureNumber}`;
+				figcaption.prepend(figureNumberElement);
+			}
 		}
 	});
 </script>
