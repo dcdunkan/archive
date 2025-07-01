@@ -3,15 +3,14 @@
 	import { Button } from "$lib/components/ui/button";
 	import { roman } from "$lib/helpers";
 	import { BookOpenIcon } from "@lucide/svelte";
+	import BiggerPicture from "bigger-picture";
+	import mermaid from "mermaid";
 	import { onMount } from "svelte";
 	import type { PageProps } from "./$types";
 	import TocTree from "./toc-tree.svelte";
 
 	let { data }: PageProps = $props();
 	let { course, module } = data;
-
-	import BiggerPicture from "bigger-picture";
-	import mermaid from "mermaid";
 
 	mermaid.initialize({
 		startOnLoad: true,
@@ -41,10 +40,8 @@
 		for (const [index, fence] of mermaidFences.entries()) {
 			if (fence.parentElement?.tagName !== "PRE") continue;
 			const content = fence.parentElement.innerText;
-			const { svg, bindFunctions } = await mermaid.render(
-				"mermaid-" + index,
-				content,
-			);
+			const { svg, bindFunctions } = await mermaid
+				.render("mermaid-" + index, content);
 
 			const figure = document.createElement("figure");
 			figure.insertAdjacentHTML("afterbegin", svg);
@@ -60,6 +57,9 @@
 			bindFunctions?.(figure);
 			fence.parentElement.replaceWith(figure);
 		}
+
+		// todo: should figures and diagrams be split?
+		// or maybe as sub-divisions. figures -> images & diagrams
 
 		/**
 		 * NOTE: Figures are made from many sources.
@@ -92,6 +92,10 @@
 			}
 		}
 	});
+
+	// todo: support for glossary. when some term is clicked, show a popover with
+	// relevant explanations and meaning and link to external stuff.
+	// markdown should introduce a specific syntax for marking and at-build time
 </script>
 
 <svelte:head>
@@ -117,6 +121,7 @@
 		<a href="#tap-questions">Questions & Answers</a>
 		<a href="#tap-figures">Figures</a>
 		<a href="#tap-tables">Tables</a>
+		<a href="#tap-glossary">Glossary</a>
 	</div>
 </div>
 
@@ -128,9 +133,9 @@
 </div>
 
 <div id="tap-markdown-preview" class="snap-y snap-start scroll-mt-24">
-	{#each module.hierarchy as part}
+	{#each module.parts as part}
 		<div class="min-h-svh">
-			{@html part.content}
+			{@html part}
 		</div>
 	{/each}
 </div>
@@ -156,5 +161,11 @@
 <div class="snap-start scroll-mt-24 space-y-4" id="tap-tables">
 	<FancyHeader class="font-serif text-2xl">Tables</FancyHeader>
 </div>
+
+<div class="snap-start scroll-mt-24 space-y-4" id="tap-glossary">
+	<FancyHeader class="font-serif text-2xl">Glossary</FancyHeader>
+</div>
+
+<!-- todo: link related stuff and modules or short info -->
 
 <div class="min-h-[50svh]"></div>

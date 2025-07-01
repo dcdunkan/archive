@@ -1,8 +1,26 @@
-import type { z } from "zod/v4";
-import type { COURSE_SCHEMA, MODULE_SCHEMA } from "./server/content";
+export type Courses = {
+	code: string;
+	name: string;
+	modules: {
+		number: number;
+		name: string;
+		slug: string;
+	}[];
+}[];
 
-type CourseData = z.infer<typeof COURSE_SCHEMA>;
-export type ModuleData = z.infer<typeof MODULE_SCHEMA>;
+export type Course = {
+	code: string;
+	name: string;
+	preamble: string;
+	textbooks: string[];
+	referenceBooks: string[];
+	modules: {
+		number: number;
+		name: string;
+		slug: string;
+		syllabus: string[];
+	}[];
+};
 
 export type TOCItem = {
 	id: string; // slugged id
@@ -11,16 +29,11 @@ export type TOCItem = {
 	children: TOCItem[];
 };
 
-export type Hierarchy = (TOCItem & { content: string })[];
-
-export type Module = ModuleData & {
-	path: string;
-	slug: string;
+export type Module = {
 	number: number;
-	hierarchy: Hierarchy;
-};
-
-export type Course = CourseData & {
-	path: string;
-	modules: Module[];
+	name: string;
+	syllabus: string[];
+	slug: string;
+	hierarchy: TOCItem[];
+	parts: string[];
 };
