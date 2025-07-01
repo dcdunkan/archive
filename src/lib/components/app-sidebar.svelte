@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import CalendarIcon from "@lucide/svelte/icons/calendar";
 	import HouseIcon from "@lucide/svelte/icons/house";
@@ -46,10 +47,10 @@
 						<Sidebar.MenuItem>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a href={item.url} {...props}>
+									<button onclick={() => goto(item.url)} {...props}>
 										<item.icon />
 										<span>{item.title}</span>
-									</a>
+									</button>
 								{/snippet}
 							</Sidebar.MenuButton>
 						</Sidebar.MenuItem>
