@@ -123,20 +123,20 @@
 	}
 
 	a {
-		@apply decoration-muted-foreground hover:decoration-accent-foreground underline
+		@apply decoration-muted-foreground/20 hover:decoration-accent-foreground underline
 			decoration-dashed underline-offset-4 transition-colors duration-150 ease-in;
 	}
 }
 
 @theme {
 	--font-sans: "Geist", sans-serif;
-	--font-serif: "Baskervville", serif;
+	--font-serif: /*"Rowan-Variable",*/ "Libre Baskerville", serif;
 	--font-mono: "Geist Mono", monospace;
 }
 
 html {
 	scroll-behavior: smooth;
-	font-size: 1.05rem;
+	/* font-size: 1.05rem; */
 }
 
 #tap-markdown-preview {

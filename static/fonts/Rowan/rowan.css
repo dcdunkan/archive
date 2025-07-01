@@ -1,0 +1,59 @@
+/**
+ * @license
+ *
+ * Font Family: Rowan
+ * Designed by: Inga Plönnigs
+ * URL: https://www.fontshare.com/fonts/rowan
+ * © 2025 Indian Type Foundry
+ *
+ * Rowan Light 
+ * Rowan LightItalic 
+ * Rowan Regular 
+ * Rowan Italic 
+ * Rowan Medium 
+ * Rowan MediumItalic 
+ * Rowan Semibold 
+ * Rowan SemiboldItalic 
+ * Rowan Bold 
+ * Rowan BoldItalic 
+ * Rowan Variable (Variable font)
+ * Rowan VariableItalic (Variable font)
+ 
+ *
+ */
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 700.0;
+*
+* available axes:
+'wght' (range from 300.0 to 700.0
+*/
+@font-face {
+	font-family: "Rowan-Variable";
+	src:
+		url("/fonts/Rowan/Rowan-Variable.woff2") format("woff2"),
+		url("/fonts/Rowan/Rowan-Variable.woff") format("woff"),
+		url("/fonts/Rowan/Rowan-Variable.ttf") format("truetype");
+	font-weight: 300 700;
+	font-display: swap;
+	font-style: normal;
+}
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 700.0;
+*
+* available axes:
+'wght' (range from 300.0 to 700.0
+*/
+@font-face {
+	font-family: "Rowan-VariableItalic";
+	src:
+		url("/fonts/Rowan/Rowan-VariableItalic.woff2") format("woff2"),
+		url("/fonts/Rowan/Rowan-VariableItalic.woff") format("woff"),
+		url("/fonts/Rowan/Rowan-VariableItalic.ttf") format("truetype");
+	font-weight: 300 700;
+	font-display: swap;
+	font-style: italic;
+}
