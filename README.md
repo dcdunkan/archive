@@ -1,10 +1,4 @@
-<div align="center">
-
-![a package box icon in an aqua-green color](./.github/icon.png)
-
 # The Archive Project
-
-</div>
 
 _The Archive Project_ is a **no-nonsense, community-managed** platform that provides free and open courses and resources.
 The project aims to be a clean, centralized, and durable archive of academic resources for college students—gathered from scattered sources by students and reorganized for easier access, reading, and studying.
