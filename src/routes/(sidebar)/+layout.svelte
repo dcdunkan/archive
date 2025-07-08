@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import AppSidebar from "$lib/components/app-sidebar.svelte";
+	import CommandMenu from "$lib/components/command-menu.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import { FullscreenIcon, MoonIcon, SearchIcon, SunIcon } from "@lucide/svelte";
@@ -22,6 +23,8 @@
 			if (event.key === "F11") setFullScreen();
 		};
 	});
+
+	let openSearchMenu = $state(false);
 </script>
 
 <Sidebar.Provider>
@@ -59,7 +62,10 @@
 						<span class="sr-only">Toggle theme</span>
 					</Button>
 
-					<Button variant="ghost"><SearchIcon /></Button>
+					<Button
+						variant="ghost"
+						onclick={() => openSearchMenu = !openSearchMenu}
+					><SearchIcon /></Button>
 				</div>
 			</nav>
 			<div class="mx-auto flex max-w-screen-lg flex-col">
@@ -72,3 +78,5 @@
 		</main>
 	</Sidebar.Inset>
 </Sidebar.Provider>
+
+<CommandMenu bind:open={openSearchMenu} />

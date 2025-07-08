@@ -10,11 +10,11 @@
 	import TocTree from "./toc-tree.svelte";
 
 	let { data }: PageProps = $props();
-	let { course, module } = data;
+	let { course, module } = $derived(data); // comment for remembering this realization moment: ALWAYS FRICKING DERIVE.
 
 	mermaid.initialize({
 		startOnLoad: true,
-		fontFamily: "Baskervville",
+		fontFamily: "var(--font-serif)",
 		theme: "neutral",
 		flowchart: {
 			curve: "linear",
@@ -36,6 +36,7 @@
 			});
 		}
 
+		// todo: important: render on server! learn how to rewrite tokens
 		const mermaidFences = document.querySelectorAll("code.language-mermaid");
 		for (const [index, fence] of mermaidFences.entries()) {
 			if (fence.parentElement?.tagName !== "PRE") continue;
@@ -96,6 +97,7 @@
 	// todo: support for glossary. when some term is clicked, show a popover with
 	// relevant explanations and meaning and link to external stuff.
 	// markdown should introduce a specific syntax for marking and at-build time
+	// terms should also be indexed
 </script>
 
 <svelte:head>
@@ -106,7 +108,7 @@
 <div class="flex min-h-svh flex-col items-center justify-center space-y-8">
 	<div class="space-y-2 text-center">
 		<div class="font-serif text-xl">Module {roman(module.number)}</div>
-		<div class="px-6 font-serif text-4xl font-bold">{module.name}</div>
+		<div class="px-6 font-serif text-5xl font-bold">{module.name}</div>
 		<!-- <div class="text-muted-foreground font-serif text-lg">{course.name}</div> -->
 	</div>
 

@@ -43,6 +43,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			`<figure>`,
 			[
 				`<img`,
+				// todo: include dimensions somehow (HARD)
 				`src="${IMAGE_PREFIX}/${src}"`,
 				`alt="${alt}"`,
 				`loading="lazy"`,

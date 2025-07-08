@@ -123,8 +123,8 @@
 	}
 
 	a {
-		@apply decoration-muted-foreground/20 hover:decoration-accent-foreground underline
-			decoration-dashed underline-offset-4 transition-colors duration-150 ease-in;
+		@apply decoration-muted-foreground/20 hover:decoration-accent-foreground underline decoration-dashed
+			underline-offset-4 transition-colors duration-150 ease-in;
 	}
 }
 
@@ -136,12 +136,13 @@
 
 html {
 	scroll-behavior: smooth;
-	/* font-size: 1.05rem; */
+	font-size: 1.05rem;
 }
 
 #tap-markdown-preview {
 	@apply px-4 text-pretty **:snap-start **:scroll-mt-24 **:hyphens-auto;
 
+	/* todo: fix the font weight for headings */
 	h1 {
 		@apply mt-16 mb-6 text-4xl font-black;
 	}
@@ -149,16 +150,16 @@ html {
 		@apply mt-8 mb-4 text-3xl font-black;
 	}
 	h3 {
-		@apply mt-6 mb-2 text-2xl font-semibold;
+		@apply mt-6 mb-2 text-2xl font-bold;
 	}
 	h4 {
 		@apply mt-6 mb-2 text-xl font-bold;
 	}
 	h5 {
-		@apply mt-4 mb-2 text-lg font-medium;
+		@apply mt-4 mb-2 text-lg font-bold;
 	}
 	h6 {
-		@apply mt-2 mb-2 text-base font-semibold;
+		@apply mt-2 mb-2 text-base font-bold;
 	}
 
 	i {
