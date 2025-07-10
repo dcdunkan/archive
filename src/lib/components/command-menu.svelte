@@ -18,10 +18,7 @@
 	} from "@lucide/svelte";
 	import { mode, toggleMode } from "mode-watcher";
 	import { onDestroy, onMount } from "svelte";
-	import { toast } from "svelte-sonner";
-	import { fade } from "svelte/transition";
 	import { z } from "zod/v4-mini";
-	import { de } from "zod/v4/locales";
 
 	// todo: move this to $lib
 
