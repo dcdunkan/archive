@@ -1,2 +1,8 @@
 @import "./Geist/geist.css";
-@import "./Rowan/rowan.css";
+/* @import "./Rowan/rowan.css";
+@import "./Literata/literata.css"; */
+@import "./Lora/lora.css";
+@import "./Recursive/recursive.css";
+@import "./SourceSerif/sourceserif.css";
+@import "./StixTwoText/stixtwotext.css";
+@import "./StixTwoMath/stixtwomath.css";

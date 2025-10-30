@@ -3,14 +3,11 @@
 	import * as Command from "$lib/components/ui/command/index";
 	import type { LoadedData } from "$lib/types";
 	import {
-		BookAIcon,
 		BookCopyIcon,
 		ChevronRightIcon,
-		FileQuestionIcon,
 		FolderArchiveIcon,
 		HashIcon,
 		Icon,
-		ImageIcon,
 		MoonIcon,
 		SunIcon,
 		TableOfContentsIcon,
@@ -22,61 +19,64 @@
 
 	// todo: move this to $lib
 
-	export const courseSearchDocumentSchema = z.object({
+	export const baseSearchDocumentSchema = z.object({
+		id: z.string(),
+		// type: z.enum(["course", "module", "chapter", "section"]),
+		title: z.string(),
+	});
+	export const courseSearchDocumentSchema = z.extend(baseSearchDocumentSchema, {
 		type: z.literal("course"),
-		name: z.string(),
-		code: z.string(),
-		modules: z.number(),
+		context: z.object({
+			courseCode: z.string(),
+			courseName: z.string(),
+		}),
 	});
 
-	export const moduleSearchDocumentSchema = z.object({
+	export const moduleSearchDocumentSchema = z.extend(baseSearchDocumentSchema, {
 		type: z.literal("module"),
-		name: z.string(),
-		number: z.number(),
-		slug: z.string(),
-		courseCode: z.string(),
-		courseName: z.string(),
+		context: z.object({
+			courseCode: z.string(),
+			courseName: z.string(),
+
+			moduleNumber: z.int(),
+			moduleSlug: z.string(),
+			moduleName: z.string(),
+		}),
 	});
 
-	export const chapterSearchDocumentSchema = z.object({
+	export const chapterSearchDocumentSchema = z.extend(baseSearchDocumentSchema, {
 		type: z.literal("chapter"),
-		title: z.string(),
-		chapterId: z.string(),
-		chapterNumber: z.number(),
-		moduleName: z.string(),
-		moduleNumber: z.number(),
-		moduleSlug: z.string(),
-		courseCode: z.string(),
-		courseName: z.string(),
+		context: z.object({
+			courseCode: z.string(),
+			courseName: z.string(),
+
+			moduleNumber: z.int(),
+			moduleSlug: z.string(),
+			moduleName: z.string(),
+
+			chapterNumber: z.int(),
+			chapterSlug: z.string(),
+			chapterName: z.string(),
+		}),
 	});
 
-	export const sectionSearchDocumentSchema = z.object({
+	export const sectionSearchDocumentSchema = z.extend(baseSearchDocumentSchema, {
 		type: z.literal("section"),
-		title: z.string(),
-		sectionId: z.string(),
-		parent: z.array(z.string()),
-		level: z.number(),
-		moduleName: z.string(),
-		moduleNumber: z.number(),
-		moduleSlug: z.string(),
-		courseCode: z.string(),
-		courseName: z.string(),
-	});
+		context: z.object({
+			courseCode: z.string(),
+			courseName: z.string(),
 
-	export const termSearchDocumentSchema = z.object({
-		type: z.literal("term"),
-	});
+			moduleNumber: z.int(),
+			moduleSlug: z.string(),
+			moduleName: z.string(),
 
-	export const figureSearchDocumentSchema = z.object({
-		type: z.literal("figure"),
-		figure_type: z.enum(["image", "diagram"]),
-		src: z.string(),
-		caption: z.string(),
-		alt: z.string(),
-	});
+			chapterNumber: z.int(),
+			chapterSlug: z.string(),
+			chapterName: z.string(),
 
-	export const questionSearchDocumentSchema = z.object({
-		type: z.literal("question"),
+			sectionParent: z.array(z.string()),
+			sectionSlug: z.string(),
+		}),
 	});
 
 	export const searchDocumentSchema = z.discriminatedUnion("type", [
@@ -84,9 +84,6 @@
 		moduleSearchDocumentSchema,
 		chapterSearchDocumentSchema,
 		sectionSearchDocumentSchema,
-		termSearchDocumentSchema,
-		figureSearchDocumentSchema,
-		questionSearchDocumentSchema,
 	]);
 	type SearchDocument = z.infer<typeof searchDocumentSchema>;
 
@@ -128,7 +125,10 @@
 			searchResults = { state: "pending", message: "One moment..." };
 			const response = await fetch(
 				`/api/search?query=${encodeURIComponent(query)}`,
-				{ signal: abortController.signal },
+				{
+					cache: "default",
+					signal: abortController.signal,
+				},
 			);
 			if (response.ok) {
 				const { results } = await response.json() as {
@@ -142,6 +142,8 @@
 					message,
 				} = await response.json() as { ok: false; message: string };
 				searchResults = { state: "failed", message: message };
+			} else {
+				searchResults = { state: "failed", message: "Something went wrong." };
 			}
 		} catch (error) {
 			if ((error as Error).name === "AbortError") {
@@ -194,13 +196,10 @@
 		module: BookCopyIcon,
 		chapter: TableOfContentsIcon,
 		section: HashIcon,
-		figure: ImageIcon,
-		question: FileQuestionIcon, // todo: where are the normal question marks
-		term: BookAIcon,
 	};
 
 	function getDetailsFromSearchResult(
-		result: SearchDocument,
+		{ type, id, title, context }: SearchDocument,
 	): {
 		value: string;
 		title: string;
@@ -208,40 +207,37 @@
 		path: string;
 		anchor?: string;
 	} {
-		switch (result.type) {
+		switch (type) {
 			case "course":
 				return {
-					value: `course:${result.code}`,
-					title: result.name,
-					crumbs: [result.code],
-					path: `/courses/${result.code}`,
+					value: id,
+					title: title,
+					crumbs: [context.courseCode],
+					path: `/courses/${context.courseCode}`,
 				};
 			case "module":
 				return {
-					value: `module:${result.courseCode}-${result.number}`,
-					title: result.name,
-					crumbs: [result.courseCode, result.courseName],
-					path: `/courses/${result.courseCode}/${result.number}-${result.slug}`,
+					value: id,
+					title: title,
+					crumbs: [context.courseCode, context.courseName],
+					path: `/courses/${context.courseCode}/${context.moduleSlug}`,
 				};
 			case "chapter":
 				return {
-					value: `chapter:${result.courseCode}-${result.moduleNumber}-${result.chapterNumber}`,
-					title: result.title,
-					crumbs: [result.courseCode, result.courseName],
-					path: `/courses/${result.courseCode}/${result.moduleNumber}-${result.moduleSlug}`,
-					anchor: result.chapterId,
+					value: id,
+					title: title,
+					crumbs: [context.courseCode, context.moduleName],
+					path: `/courses/${context.courseCode}/${context.moduleSlug}/${context.chapterSlug}`,
 				};
 			case "section":
 				return {
-					value: `section:${result.courseCode}-${result.moduleNumber}-${result.sectionId}`,
-					title: result.title,
-					crumbs: [result.courseCode, result.courseName],
-					path: `/courses/${result.courseCode}/${result.moduleNumber}-${result.moduleSlug}`,
-					anchor: result.sectionId,
+					value: id,
+					title: title,
+					crumbs: [context.courseCode, context.chapterName],
+					path: `/courses/${context.courseCode}/${context.moduleSlug}/${context.chapterSlug}`,
+					anchor: context.sectionSlug,
 				};
-			case "term":
-			case "figure":
-			case "question":
+			default:
 				throw new Error("not implemented: unexpected type of search result obtained");
 		}
 	}

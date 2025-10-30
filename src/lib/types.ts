@@ -1,6 +1,7 @@
 export type Courses = {
 	code: string;
 	name: string;
+	description: string;
 	modules: {
 		number: number;
 		name: string;
@@ -11,6 +12,7 @@ export type Courses = {
 export type Course = {
 	code: string;
 	name: string;
+	description: string;
 	preamble: string;
 	textbooks: string[];
 	referenceBooks: string[];
@@ -22,11 +24,20 @@ export type Course = {
 	}[];
 };
 
-export type TOCItem = {
-	id: string; // slugged id
-	level: number;
+export type HeadingItem = {
+	slug: string;
 	title: string;
-	children: TOCItem[];
+	depth: number;
+	children: HeadingItem[];
+};
+
+export type ModuleChapter = {
+	number: number;
+	title: string;
+	slug: string;
+	structure: HeadingItem[];
+	content: string; // html content
+	// content: Mdast.Root; todo: fix up mdast
 };
 
 export type Module = {
@@ -34,8 +45,12 @@ export type Module = {
 	name: string;
 	syllabus: string[];
 	slug: string;
-	hierarchy: TOCItem[];
-	parts: string[];
+	chapters: {
+		number: number;
+		title: string;
+		slug: string;
+		structure: HeadingItem[];
+	}[];
 };
 
 export type LoadedSuccess<T> = { state: "resolved"; data: T };

@@ -16,8 +16,7 @@
 	let isFullScreen = $state(queryFullScreen());
 
 	$effect(() => {
-		const setFullScreen =
-			() => (isFullScreen = document.fullscreenElement != null || queryFullScreen());
+		const setFullScreen = () => (isFullScreen = document.fullscreenElement != null || queryFullScreen());
 		document.addEventListener("fullscreenchange", setFullScreen);
 		document.onkeyup = (event) => {
 			if (event.key === "F11") setFullScreen();
@@ -68,7 +67,7 @@
 					><SearchIcon /></Button>
 				</div>
 			</nav>
-			<div class="mx-auto flex max-w-screen-lg flex-col">
+			<div class="mx-auto flex max-w-2xl flex-col">
 				<div class="p-6">
 					<div class="snap-y space-y-8">
 						{@render children()}
@@ -80,3 +79,5 @@
 </Sidebar.Provider>
 
 <CommandMenu bind:open={openSearchMenu} />
+
+<div class="min-h-[50svh]"></div>

@@ -1,10 +1,8 @@
 <script lang="ts">
 	import SearchInput from "$lib/components/search-input.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import { ArrowRightIcon } from "@lucide/svelte";
+	import { pluralize } from "$lib/helpers";
 	import fuzzysort from "fuzzysort";
 	import type { PageProps } from "./$types";
-  import { pluralize } from "$lib/helpers";
 
 	let { data }: PageProps = $props();
 
@@ -12,7 +10,7 @@
 
 	const searchResults = $derived.by(() => {
 		return fuzzysort.go(searchString, data.courses, {
-			keys: ["code", "name"],
+			keys: ["code", "name", "description"],
 			all: true,
 		});
 	});
@@ -25,23 +23,22 @@
 	/>
 </div>
 
-<div class="grid grid-cols-1 gap-1 sm:grid-cols-2">
+<div class="grid grid-cols-1 gap-1">
 	{#each searchResults as course}
-		<div class="hover:bg-accent/20 flex w-full place-items-center justify-between gap-2 border p-6 transition-all duration-150 first:rounded-t-lg last:rounded-b-lg sm:rounded-lg">
-			<div class="space-y-1">
-				<div class="font-serif text-xl">{course.obj.name}</div>
-				<div class="text-muted-foreground text-xs">
-					{course.obj.code} &middot; {course.obj.modules.length} modules &middot;
-					<!-- {course.obj.documents} documents -->
-				</div>
+		<a
+			href="/courses/{course.obj.code}"
+			class="block hover:bg-muted gap-2 border px-6 py-4 transition-all duration-300 first:rounded-t-lg last:rounded-b-lg sm:rounded-lg space-y-2"
+		>
+			<div class="space-y-0.5">
+			<div class="font-serif text-lg leading-snug">{course.obj.name}</div>
+			<div class="text-pretty text-muted-foreground text-sm">
+				{course.obj.description}
 			</div>
-			<Button
-				variant="outline"
-				class="aspect-square size-10"
-				href="/courses/{course.obj.code}"
-			>
-				<ArrowRightIcon />
-			</Button>
-		</div>
+			</div>
+			<div class="text-muted-foreground text-sm">
+				{course.obj.code} &middot; {course.obj.modules.length} modules
+				<!--  &middot; {course.obj.documents} documents -->
+			</div>
+		</a>
 	{/each}
 </div>

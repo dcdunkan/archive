@@ -1,0 +1,51 @@
+/**
+ * @license
+ *
+ * Font Family: Lora
+ * Designed by: Cyreal, Olga Karpushina, Alexei Vanyashin
+ * URL: https://www.fontshare.com/fonts/lora
+ * © 2025 Indian Type Foundry
+ *
+ * Lora Regular 
+ * Lora Italic 
+ * Lora Medium 
+ * Lora MediumItalic 
+ * Lora SemiBold 
+ * Lora SemiBoldItalic 
+ * Lora Bold 
+ * Lora BoldItalic 
+ * Lora Variable (Variable font)
+ * Lora VariableItalic (Variable font)
+ 
+ *
+ */
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 400.0;
+*
+* available axes:
+'wght' (range from 400.0 to 700.0
+*/
+@font-face {
+	font-family: "Lora-Variable";
+	src: url("/fonts/Lora/Lora-Variable.woff2") format("woff2");
+	font-weight: 400 700;
+	font-display: swap;
+	font-style: normal;
+}
+/**
+* This is a variable font
+* You can control variable axes as shown below:
+* font-variation-settings: wght 400.0;
+*
+* available axes:
+'wght' (range from 400.0 to 700.0
+*/
+@font-face {
+	font-family: "Lora-Variable";
+	src: url("/fonts/Lora/Lora-VariableItalic.woff2") format("woff2");
+	font-weight: 400 700;
+	font-display: swap;
+	font-style: italic;
+}

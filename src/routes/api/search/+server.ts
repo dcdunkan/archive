@@ -13,11 +13,15 @@ export const GET = async ({ url, fetch }) => {
 	const apiUrl = new URL(SEARCH_API_ROOT + "/search");
 	apiUrl.searchParams.set("query", query);
 
-	const response = await fetch(apiUrl, { cache: "no-cache" });
+	const response = await fetch(apiUrl, { cache: "no-cache" }); // todo: caching should be controlled in the client side, or should it be?
 	if (response.ok) {
 		return json({
 			ok: true,
 			results: await response.json(),
+		}, {
+			headers: {
+				"Cache-Control": "public, max-age=3600",
+			},
 		});
 	} else {
 		return json({

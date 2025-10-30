@@ -4,8 +4,8 @@ import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
-	const courseCode = params.courseId.toLowerCase();
-	const course = await api.get(`course/${courseCode}.json`).json<Course>();
+	const courseCode = params.courseCode;
+	const course = await api.get(`courses/${courseCode}.json`).json<Course>();
 
 	if (course == null) {
 		// todo: add +error.svelte for this subroute

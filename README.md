@@ -23,7 +23,7 @@ Feature support:
 
 - [x] KaTeX & Math
 - [x] Images
-- [x] Mermaid diagrams
+- [x] D2 diagrams
 - [ ] SVG & Excalidraw diagrams (can look into <https://github.com/rough-stuff/rough>)
 - [ ] Charts
 - [ ] Blockquotes

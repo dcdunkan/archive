@@ -122,7 +122,7 @@
 		@apply bg-background text-foreground font-serif text-base;
 	}
 
-	a {
+	a .href-underline {
 		@apply decoration-muted-foreground/20 hover:decoration-accent-foreground underline decoration-dashed
 			underline-offset-4 transition-colors duration-150 ease-in;
 	}
@@ -130,36 +130,39 @@
 
 @theme {
 	--font-sans: "Geist", sans-serif;
-	--font-serif: /*"Rowan-Variable",*/ "Libre Baskerville", serif;
+	--font-serif:
+		/* "StixTwoText-Variable", */
+		"SourceSerif-Variable", /*"Lora-Variable", "Rowan-Variable", "Libre Baskerville",*/ serif;
 	--font-mono: "Geist Mono", monospace;
+	--font-math: "StixTwoMath-Regular";
 }
 
 html {
 	scroll-behavior: smooth;
-	font-size: 1.05rem;
+	font-size: 1rem;
 }
 
 #tap-markdown-preview {
-	@apply px-4 text-pretty **:snap-start **:scroll-mt-24 **:hyphens-auto;
+	@apply text-pretty **:snap-start **:scroll-m-24 **:hyphens-auto;
 
 	/* todo: fix the font weight for headings */
 	h1 {
-		@apply mt-16 mb-6 text-4xl font-black;
+		@apply -mt-2 mb-6 text-4xl font-extrabold;
 	}
 	h2 {
-		@apply mt-8 mb-4 text-3xl font-black;
+		@apply mt-6 mb-4 text-3xl font-semibold;
 	}
 	h3 {
-		@apply mt-6 mb-2 text-2xl font-bold;
+		@apply mt-6 mb-2 text-2xl font-semibold;
 	}
 	h4 {
-		@apply mt-6 mb-2 text-xl font-bold;
+		@apply mt-6 mb-2 text-xl font-semibold;
 	}
 	h5 {
-		@apply mt-4 mb-2 text-lg font-bold;
+		@apply mt-4 mb-2 text-lg font-medium;
 	}
 	h6 {
-		@apply mt-2 mb-2 text-base font-bold;
+		@apply mt-2 mb-2 text-base font-medium;
 	}
 
 	i {
@@ -223,10 +226,16 @@ html {
 		@apply border-muted-foreground border-2 p-2;
 	}
 
-	.katex-block {
-		@apply flex flex-col items-center justify-center p-2;
+	/* maths & notations */
+	math {
+		@apply font-math text-lg;
 	}
 
+	.katex-display {
+		@apply flex flex-col items-center justify-center py-4;
+	}
+
+	/* figures */
 	figure {
 		@apply my-6 text-center flex flex-col justify-center items-center;
 	}

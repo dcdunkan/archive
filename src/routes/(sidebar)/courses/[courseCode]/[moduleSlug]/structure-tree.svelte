@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { page } from "$app/state";
 	import { cn } from "$lib/shadcn-utils";
-	import type { TOCItem } from "$lib/types";
-	import TocTree from "./toc-tree.svelte";
+	import type { HeadingItem } from "$lib/types";
+	import StructureTree from "./structure-tree.svelte";
 
-	let { entries }: { entries: TOCItem[] } = $props();
+	let { entries, path }: { path: string; entries: HeadingItem[] } = $props();
 
-	let currentLevel = $derived(entries[0]?.level || 0);
+	let currentLevel = $derived(entries[0]?.depth || 0);
 </script>
 
 <ol
@@ -28,11 +27,11 @@
 					["", "font-bold uppercase", "font-semibold"][currentLevel],
 				)}
 			>
-				<a href="#{entry.id}">{entry.title}</a>
+				<a href="{path}#{entry.slug}">{entry.title}</a>
 			</div>
 
 			{#if entry.children.length > 0}
-				<TocTree entries={entry.children} />
+				<StructureTree entries={entry.children} path={path} />
 			{/if}
 		</li>
 	{/each}
