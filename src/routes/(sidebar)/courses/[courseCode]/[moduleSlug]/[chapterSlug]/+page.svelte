@@ -40,11 +40,11 @@
 </div>
 
 <div>
-	<div class="sm:flex sm:justify-between sm:gap-2 sm:space-y-0 space-y-2 sm:place-items-center">
+	<div class="flex flex-col sm:flex-row sm:justify-between sm:gap-2 space-y-2 sm:space-y-0 sm:items-center">
 		{#if data.previousChapter != null}
 			<a
 				href={data.previousChapter.slug}
-				class="border hover:border-primary duration-300 transition-all sm:w-full rounded-sm border-l-8 px-4 py-3 flex gap-2 place-items-center text-left"
+				class="border hover:border-primary duration-300 transition-all rounded-sm px-4 py-3 border-l-8 text-left sm:w-full"
 			>
 				<div>
 					<div class="text-sm text-muted-foreground italic">Previous Chapter</div>
@@ -54,7 +54,7 @@
 				</div>
 			</a>
 		{:else}
-			<div class="sm:w-full"></div>
+			<div class="sm:w-full h-0"></div>
 		{/if}
 		{#if data.nextChapter != null}
 			<a
@@ -67,7 +67,7 @@
 				</div>
 			</a>
 		{:else}
-			<div class="sm:w-full"></div>
+			<div class="sm:w-full h-0"></div>
 		{/if}
 	</div>
 </div>
