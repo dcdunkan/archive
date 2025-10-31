@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { PUBLIC_SEARCH_API_ROOT } from "$env/static/public";
 	import * as Command from "$lib/components/ui/command/index";
 	import type { LoadedData } from "$lib/types";
 	import {
@@ -93,12 +94,19 @@
 		open: boolean;
 	} = $props();
 
+	let searchInputEl = $state<HTMLInputElement | null>(null);
+
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
 			e.preventDefault();
 			open = !open;
 		}
 	}
+
+	$effect(() => {
+		if (!open) return;
+		searchInputEl?.select();
+	});
 
 	let searchInput = $state("");
 	let searchResults: LoadedData<SearchDocument[]> = $state({
@@ -121,27 +129,21 @@
 			abortController.abort();
 		}
 		abortController = new AbortController();
+
 		try {
 			searchResults = { state: "pending", message: "One moment..." };
 			const response = await fetch(
-				`/api/search?query=${encodeURIComponent(query)}`,
+				`${PUBLIC_SEARCH_API_ROOT}/search?query=${encodeURIComponent(query)}`,
 				{
 					cache: "default",
 					signal: abortController.signal,
 				},
 			);
 			if (response.ok) {
-				const { results } = await response.json() as {
-					ok: true;
-					results: SearchDocument[];
-				};
+				const results = await response.json() as SearchDocument[];
 				searchResults = { state: "resolved", data: results };
 			} else if (response.status == 400) {
-				// todo: abstract all of this into small validators (check if zod mini is actually really mini)
-				const {
-					message,
-				} = await response.json() as { ok: false; message: string };
-				searchResults = { state: "failed", message: message };
+				searchResults = { state: "failed", message: "Invalid query" };
 			} else {
 				searchResults = { state: "failed", message: "Something went wrong." };
 			}
@@ -283,7 +285,7 @@
 {/snippet}
 
 <Command.Dialog bind:open shouldFilter={false}>
-	<Command.Input placeholder="Search" bind:value={searchInput} />
+	<Command.Input placeholder="Search" bind:value={searchInput} bind:ref={searchInputEl} />
 	<Command.List>
 		{#if searchInput.trim().length == 0}
 			{#if recentSearches.length > 0}
