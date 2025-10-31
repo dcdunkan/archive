@@ -1,4 +1,4 @@
-import { api } from "$lib/server/content-api";
+import { api } from "$lib/content-api";
 import type { Courses } from "$lib/types";
 import type { PageServerLoad } from "./$types";
 

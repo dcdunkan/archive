@@ -1,4 +1,4 @@
-import { api } from "$lib/server/content-api";
+import { api } from "$lib/content-api";
 import type { Course, Module } from "$lib/types";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
