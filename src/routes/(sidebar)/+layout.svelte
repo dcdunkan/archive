@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { page } from "$app/state";
+	import { navigating } from "$app/stores";
 	import AppSidebar from "$lib/components/app-sidebar.svelte";
 	import CommandMenu from "$lib/components/command-menu.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import { FullscreenIcon, MoonIcon, SearchIcon, SunIcon } from "@lucide/svelte";
 	import { toggleMode } from "mode-watcher";
+	import { cubicOut } from "svelte/easing";
+	import { Tween } from "svelte/motion";
 
 	let { children } = $props();
 
 	function queryFullScreen() {
-		return typeof matchMedia === "function"
-			&& matchMedia("(display-mode: fullscreen)").matches;
+		return typeof matchMedia === "function" && matchMedia("(display-mode: fullscreen)").matches;
 	}
 	let isFullScreen = $state(queryFullScreen());
 
@@ -24,6 +26,19 @@
 	});
 
 	let openSearchMenu = $state(false);
+
+	const width = new Tween(0, { duration: 300, easing: cubicOut });
+	const height = new Tween(0, { duration: 10, easing: cubicOut });
+
+	$effect(() => {
+		if ($navigating) {
+			height.set(3);
+			width.set(Math.random() * 20 + 50);
+		} else {
+			width.set(100);
+			setTimeout(() => height.set(0), 200);
+		}
+	});
 </script>
 
 <Sidebar.Provider>
@@ -32,6 +47,11 @@
 	<Sidebar.Inset>
 		<main class="w-full">
 			<nav class="bg-background/50 sticky top-0 z-20 flex place-items-center gap-4 border-b p-3 backdrop-blur-lg">
+				<div
+					style="height: {height.current}px; width: {width.current}%;"
+					class="absolute bottom-0 left-0 bg-primary w-0 transition-all duration-150 ease-out"
+				></div>
+
 				<Sidebar.Trigger class="size-10" />
 				<h1 class="grow truncate font-medium">{page.data.title}</h1>
 				<div class="space-x-1">
@@ -39,8 +59,7 @@
 						variant="ghost"
 						onclick={async () => {
 							if (!isFullScreen) {
-								await document.documentElement
-									.requestFullscreen();
+								await document.documentElement.requestFullscreen();
 							} else if (document.fullscreenElement) {
 								await document.exitFullscreen();
 							} else {
