@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_CONTENT_API_ROOT } from "$env/static/public";
 	import { roman } from "$lib/helpers";
 	import BiggerPicture from "bigger-picture";
 	import { onMount } from "svelte";
@@ -25,7 +26,7 @@
 	<!-- todo: revisit here -->
 	<title>{chapter.title}</title>
 
-	<link rel="stylesheet" href="http://localhost:8000/diagrams/styles.css" />
+	<link rel="stylesheet" href="{PUBLIC_CONTENT_API_ROOT}/diagrams/styles.css" />
 	<!-- no need to include katex stylesheet as we are only dealing with mathml for now. as lightweight as possible -->
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" /> -->
 </svelte:head>
